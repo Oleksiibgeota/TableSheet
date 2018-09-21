@@ -1,6 +1,7 @@
 package com.sheet.work.time.table.service;
 
 
+import com.sheet.work.time.table.dto.EmployeeDto;
 import com.sheet.work.time.table.repository.EmployeeRepository;
 import com.sheet.work.time.table.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +12,29 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Employee getEmployeeById(Long id) {
-        Employee employee = employeeRepository.getOne((long) 1);
-
-//        Employee employee = employeeRepository.getOne(id);
-        return employee;
+    public EmployeeDto getEmployeeById(Long id) {
+        Employee employee = employeeRepository.getOne(id);
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setId(employee.getId());
+        employeeDto.setFirstName(employee.getFirstName());
+        employeeDto.setLastName(employee.getLastName());
+        return employeeDto;
     }
 
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee saveEmployee(EmployeeDto employeeDto) {
+        Employee newEmployee = new Employee();
+        newEmployee.setFirstName(employeeDto.getFirstName());
+        newEmployee.setLastName(employeeDto.getLastName());
+        return employeeRepository.save(newEmployee);
 
     }
 
-    public Employee updateEmployee(Employee employee, Long id) {
-        employeeRepository.getOne(id).setFirstName(employee.getFirstName());
-        employeeRepository.getOne(id).setLastName(employee.getLastName());
-        employeeRepository.getOne(id).setId(employee.getId());
-        return employeeRepository.getOne(id);
-
+    public Employee updateEmployee(EmployeeDto employeeDto, Long id) {
+        Employee newEmployee = employeeRepository.getOne(id);
+        newEmployee.setFirstName(employeeDto.getFirstName());
+        newEmployee.setLastName(employeeDto.getLastName());
+        newEmployee.setId(employeeDto.getId());
+        employeeRepository.save(newEmployee);
+        return newEmployee;
     }
 }
