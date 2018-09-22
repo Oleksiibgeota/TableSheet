@@ -15,6 +15,4 @@ public class TimeSheet {
     private String name;
     @OneToMany
     List<Employee> employees;
-
-
 }
