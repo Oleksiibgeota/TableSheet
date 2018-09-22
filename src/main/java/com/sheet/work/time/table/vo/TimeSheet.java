@@ -8,9 +8,13 @@ import java.util.List;
 @Data
 @Entity
 @Table
-public class TeamWork {
+public class TimeSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToMany
+    List<Employee> employees;
+
+
 }

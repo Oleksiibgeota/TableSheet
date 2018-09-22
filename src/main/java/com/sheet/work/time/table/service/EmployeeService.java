@@ -7,6 +7,9 @@ import com.sheet.work.time.table.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class EmployeeService {
     @Autowired
@@ -15,10 +18,19 @@ public class EmployeeService {
     public EmployeeDto getEmployeeById(Long id) {
         Employee employee = employeeRepository.getOne(id);
         EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setId(employee.getId());
-        employeeDto.setFirstName(employee.getFirstName());
-        employeeDto.setLastName(employee.getLastName());
+        EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
         return employeeDto;
+    }
+
+    public List<EmployeeDto> getEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDto employeeDto = new EmployeeDto();
+            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
+            employeeDtos.add(employeeDto);
+        }
+        return employeeDtos;
     }
 
     public Employee saveEmployee(EmployeeDto employeeDto) {
@@ -29,12 +41,30 @@ public class EmployeeService {
 
     }
 
-    public Employee updateEmployee(EmployeeDto employeeDto, Long id) {
+    public EmployeeDto updateEmployee(EmployeeDto employeeDto, Long id) {
         Employee newEmployee = employeeRepository.getOne(id);
+//        ConvertEmployeeDtoToVo(employeeDto,newEmployee);
         newEmployee.setFirstName(employeeDto.getFirstName());
         newEmployee.setLastName(employeeDto.getLastName());
         newEmployee.setId(employeeDto.getId());
         employeeRepository.save(newEmployee);
-        return newEmployee;
+        return employeeDto;
+    }
+
+    public static EmployeeDto ConvertEmployeeVoToDto(Employee employeeVo, EmployeeDto employeeDto) {
+        employeeDto.setId(employeeVo.getId());
+        employeeDto.setFirstName(employeeVo.getFirstName());
+        employeeDto.setLastName(employeeVo.getLastName());
+        return employeeDto;
+    }
+
+    public static Employee ConvertEmployeeDtoToVo(EmployeeDto employeeDto, Employee employeeVo) {
+        employeeVo.setId(employeeDto.getId());
+        employeeVo.setFirstName(employeeDto.getFirstName());
+        employeeVo.setLastName(employeeDto.getLastName());
+        return employeeVo;
     }
 }
+
+
+

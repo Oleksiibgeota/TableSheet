@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -22,19 +22,31 @@ public class EmployeeController {
 
     @GetMapping("/employees/{employeeId}")
     public HttpEntity<EmployeeDto> getEmployeeById(@PathVariable Long employeeId) {
-       EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-        return new ResponseEntity<>(employeeDto, HttpStatus.OK);
+        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
+        System.out.println(employeeDto);
+        if (employeeDto == null) {
+            return new ResponseEntity<>(
+                    HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(employeeDto, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/employees")
+    public HttpEntity<List<EmployeeDto>> getEmployees() {
+        List<EmployeeDto> employeeDtos = employeeService.getEmployees();
+        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
     }
 
     @PostMapping(path = "/addNewEmployee", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     HttpEntity<Employee> newEmployee(@RequestBody EmployeeDto newEmployeeDto) {
-        return new ResponseEntity<>(employeeService.saveEmployee(newEmployeeDto), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.saveEmployee(newEmployeeDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateEmployee/{employeeId}")
     public @ResponseBody
-    HttpEntity<Employee> replaceEmployee(@RequestBody EmployeeDto newEmployeeDto, @PathVariable Long employeeId) {
-        return new ResponseEntity<>(employeeService.updateEmployee(newEmployeeDto, employeeId), HttpStatus.OK);
+    HttpEntity<EmployeeDto> replaceEmployee(@RequestBody EmployeeDto newEmployeeDto, @PathVariable Long employeeId) {
+        return new ResponseEntity<EmployeeDto>(employeeService.updateEmployee(newEmployeeDto, employeeId), HttpStatus.OK);
     }
 }
