@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -16,7 +17,9 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public EmployeeDto getEmployeeById(Long id) {
-        Employee employee = employeeRepository.getOne(id);
+
+        Employee employee = employeeRepository.findById(id).get();
+        System.out.println("employee from databases" + " " + employee);
         EmployeeDto employeeDto = new EmployeeDto();
         EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
         return employeeDto;
