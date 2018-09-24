@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -19,11 +18,32 @@ public class EmployeeService {
     public EmployeeDto getEmployeeById(Long id) {
 
         Employee employee = employeeRepository.findById(id).get();
-        System.out.println("employee from databases" + " " + employee);
         EmployeeDto employeeDto = new EmployeeDto();
+        System.out.println("EmployeeService findById" + " " + employee);
+
         EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
+
         return employeeDto;
     }
+
+//    public EmployeeDto getEmployeesByFirstName(String firstName) {
+//        try {
+//            List<Employee> employees = employeeRepository.findEmployeesByFirstName(firstName);
+//            List<EmployeeDto> employeeDtos = new ArrayList<>();
+//            for (Employee employee : employees) {
+//                System.out.println(employee);
+//                EmployeeDto employeeDto = new EmployeeDto();
+//                EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
+//                employeeDtos.add(employeeDto);
+//            }
+//            return (EmployeeDto) employeeDtos;
+//        } catch (IllegalStateException e) {
+//            System.out.println("----------------------------");
+//        }
+//        return null;
+//
+//    }
+
 
     public List<EmployeeDto> getEmployees() {
         List<Employee> employees = employeeRepository.findAll();

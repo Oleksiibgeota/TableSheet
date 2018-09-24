@@ -9,7 +9,7 @@ INSERT INTO employee (id, first_name, last_name,team_work_id) VALUES
 (4, 'Georgiy', 'Nejin',2);
 INSERT INTO employee (id, first_name, last_name) VALUES
 (5, 'Sasha', 'Stariy'),
-(6, 'Ivan', 'Ivanich'),
+(6, 'Kolya', 'Ivanich'),
 (7, 'Senya', 'Ysachev'),
 (8, 'Senja', 'Tkachenko'),
 (9, 'Aleksandr', 'Beliy');
