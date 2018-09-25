@@ -15,15 +15,14 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public EmployeeDto getEmployeeById(Long id) {
-
-        Employee employee = employeeRepository.findById(id).get();
-        EmployeeDto employeeDto = new EmployeeDto();
-        System.out.println("EmployeeService findById" + " " + employee);
-
-        EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
-
-        return employeeDto;
+    public EmployeeDto getEmployeeById(Long id) throws EntityNotFoundException {
+        if (employeeRepository.existsById(id)) {
+            Employee employee = employeeRepository.findById(id).get();
+            EmployeeDto employeeDto = new EmployeeDto();
+            System.out.println("EmployeeService findById" + " " + employee);
+            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
+            return employeeDto;
+        } else throw new EntityNotFoundException("employee not found by id " + id);
     }
 
 //    public EmployeeDto getEmployeesByFirstName(String firstName) {

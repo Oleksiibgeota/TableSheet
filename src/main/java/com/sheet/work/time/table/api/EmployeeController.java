@@ -3,7 +3,7 @@ package com.sheet.work.time.table.api;
 
 import com.sheet.work.time.table.dto.EmployeeDto;
 import com.sheet.work.time.table.service.EmployeeService;
-import com.sheet.work.time.table.service.TableException;
+import com.sheet.work.time.table.service.EntityNotFoundException;
 import com.sheet.work.time.table.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -22,15 +22,11 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping(value = "/employees/{employeeId}")
-    public HttpEntity<EmployeeDto> getEmployeeById(@PathVariable Long employeeId) {
-
-        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-        if (employeeDto != null) {
-            ResponseEntity<EmployeeDto> reEmployeeDto = new ResponseEntity<>(employeeDto, HttpStatus.OK);
-            System.out.println("method getBody" + " " + reEmployeeDto.getBody());
-            return reEmployeeDto;
-        } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity getEmployeeById(@PathVariable Long employeeId) {
+        try {
+            return ResponseEntity.ok(employeeService.getEmployeeById(employeeId));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(204).body(e.getMessage());
         }
     }
 
@@ -40,19 +36,19 @@ public class EmployeeController {
 //        return new ResponseEntity<List<EmployeeDto>>(employeeDtos, HttpStatus.OK);
 //    }
 
-    @GetMapping(value = "/employees/{employeeId}/team_work/{teamId}")
-    public HttpEntity<EmployeeDto> getEmployeeByIdWhereTeamWorkId(@PathVariable Long employeeId, Long teamId) throws TableException {
-
-        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-        if (employeeDto != null) {
-            ResponseEntity<EmployeeDto> reEmployeeDto = new ResponseEntity<>(employeeDto, HttpStatus.OK);
-            System.out.println("method getBody" + " " + reEmployeeDto.getBody());
-            return reEmployeeDto;
-        } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-    }
+//    @GetMapping(value = "/employees/{employeeId}/team_work/{teamId}")
+//    public HttpEntity<EmployeeDto> getEmployeeByIdWhereTeamWorkId(@PathVariable Long employeeId, Long teamId) throws EntityNotFoundException {
+//
+//        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
+//        if (employeeDto != null) {
+//            ResponseEntity<EmployeeDto> reEmployeeDto = new ResponseEntity<>(employeeDto, HttpStatus.OK);
+//            System.out.println("method getBody" + " " + reEmployeeDto.getBody());
+//            return reEmployeeDto;
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//
+//    }
 
 
     @GetMapping(value = "/employees")
