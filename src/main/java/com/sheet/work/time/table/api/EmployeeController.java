@@ -26,15 +26,21 @@ public class EmployeeController {
         try {
             return ResponseEntity.ok(employeeService.getEmployeeById(employeeId));
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(204).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-//    @GetMapping(value = "/employees/{employeesFirstName}")
-//    public HttpEntity<List<EmployeeDto>> getEmployeesByFirstName(@PathVariable String employeesFirstName) {
-//        List<EmployeeDto> employeeDtos = (List<EmployeeDto>) employeeService.getEmployeesByFirstName(employeesFirstName);
-//        return new ResponseEntity<List<EmployeeDto>>(employeeDtos, HttpStatus.OK);
-//    }
+    @GetMapping(value = "/employees/byname/{employeesFirstName}")
+    public HttpEntity<List<EmployeeDto>> getEmployeesByFirstName(@PathVariable String employeesFirstName) {
+        List<EmployeeDto> employeeDtos = employeeService.getEmployeesByFirstName(employeesFirstName);
+        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/employees/teamwork/{idTeamWork}")
+    public HttpEntity<List<EmployeeDto>> getEmployeesWhereTeamWorkId(@PathVariable Long idTeamWork) {
+        List<EmployeeDto> employeeDtos = employeeService.getEmployeesWhereTeamWorkId(idTeamWork);
+        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+    }
 
 //    @GetMapping(value = "/employees/{employeeId}/team_work/{teamId}")
 //    public HttpEntity<EmployeeDto> getEmployeeByIdWhereTeamWorkId(@PathVariable Long employeeId, Long teamId) throws EntityNotFoundException {

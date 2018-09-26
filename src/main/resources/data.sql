@@ -6,10 +6,10 @@ INSERT INTO employee (id, first_name, last_name,team_work_id) VALUES
 (1, 'Oleksii', 'Nefedov',1),
 (2, 'Petya', 'Ivanov',1),
 (3, 'Kolya', 'Kyplevackiy',2),
-(4, 'Georgiy', 'Nejin',2);
+(4, 'Georgiy', 'Nejin',2),
+(5, 'Sasha', 'Stariy',2),
+(6, 'Kolya', 'Ivanich',1);
 INSERT INTO employee (id, first_name, last_name) VALUES
-(5, 'Sasha', 'Stariy'),
-(6, 'Kolya', 'Ivanich'),
 (7, 'Senya', 'Ysachev'),
 (8, 'Senja', 'Tkachenko'),
 (9, 'Aleksandr', 'Beliy');

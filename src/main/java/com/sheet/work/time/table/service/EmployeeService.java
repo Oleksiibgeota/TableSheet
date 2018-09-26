@@ -2,7 +2,7 @@ package com.sheet.work.time.table.service;
 
 
 import com.sheet.work.time.table.dto.EmployeeDto;
-import com.sheet.work.time.table.repository.EmployeeRepository;
+import com.sheet.work.time.table.repository.employeeRepository.EmployeeRepository;
 import com.sheet.work.time.table.vo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,27 +25,35 @@ public class EmployeeService {
         } else throw new EntityNotFoundException("employee not found by id " + id);
     }
 
-//    public EmployeeDto getEmployeesByFirstName(String firstName) {
-//        try {
-//            List<Employee> employees = employeeRepository.findEmployeesByFirstName(firstName);
-//            List<EmployeeDto> employeeDtos = new ArrayList<>();
-//            for (Employee employee : employees) {
-//                System.out.println(employee);
-//                EmployeeDto employeeDto = new EmployeeDto();
-//                EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
-//                employeeDtos.add(employeeDto);
-//            }
-//            return (EmployeeDto) employeeDtos;
-//        } catch (IllegalStateException e) {
-//            System.out.println("----------------------------");
-//        }
-//        return null;
-//
-//    }
+    public List<EmployeeDto> getEmployeesByFirstName(String firstName) {
+        List<Employee> employees = employeeRepository.findEmployeesByFirstName(firstName);
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        for (Employee employee : employees) {
+            System.out.println(employee);
+            EmployeeDto employeeDto = new EmployeeDto();
+            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
+            employeeDtos.add(employeeDto);
+        }
+        return  employeeDtos;
+    }
 
 
     public List<EmployeeDto> getEmployees() {
         List<Employee> employees = employeeRepository.findAll();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDto employeeDto = new EmployeeDto();
+            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
+            employeeDtos.add(employeeDto);
+        }
+        return employeeDtos;
+    }
+
+
+//    get all Employee where TeamWork id=?
+
+    public List<EmployeeDto> getEmployeesWhereTeamWorkId(Long idTeamWork) {
+        List<Employee> employees = employeeRepository.findAllEmployeesByTeamWorkId(idTeamWork);
         List<EmployeeDto> employeeDtos = new ArrayList<>();
         for (Employee employee : employees) {
             EmployeeDto employeeDto = new EmployeeDto();
