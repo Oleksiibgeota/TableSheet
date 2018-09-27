@@ -1,4 +1,44 @@
 package com.sheet.work.time.table.service;
 
+import com.sheet.work.time.table.dto.ProjectDto;
+import com.sheet.work.time.table.repository.projectRepository.ProjectRepository;
+import com.sheet.work.time.table.vo.Project;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
 public class ProjectService {
+    @Autowired
+    ProjectRepository projectRepository;
+
+    public List<ProjectDto> projectDtos() {
+        List<Project> projects = projectRepository.findAll();
+        List<ProjectDto> projectDtos = new ArrayList<>();
+        for (Project project : projects) {
+            ProjectDto projectDto = new ProjectDto();
+            ConvertProjectVoToDto(project, projectDto);
+            projectDtos.add(projectDto);
+        }
+        return projectDtos;
+    }
+
+    public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {
+        projectDto.setId(projectVo.getId());
+        projectDto.setName(projectVo.getName());
+        projectDto.setAddress(projectVo.getAddress());
+        projectDto.setDescription(projectVo.getDescription());
+        return projectDto;
+    }
+
+    public static Project ConvertProjectDtoToVo(ProjectDto projectDto, Project projectVo) {
+        projectVo.setId(projectDto.getId());
+        projectVo.setName(projectDto.getName());
+        projectVo.setAddress(projectDto.getAddress());
+        projectVo.setDescription(projectDto.getDescription());
+        return projectVo;
+    }
+
 }
