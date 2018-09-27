@@ -16,11 +16,3 @@ public class Project {
     private String name;
     private String description;
     private String address;
-
-    protected Project() {
-    }
-
-    public Project(String name) {
-        this.name = name;
-    }
-}
