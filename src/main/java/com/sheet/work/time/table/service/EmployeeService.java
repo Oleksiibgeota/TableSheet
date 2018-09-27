@@ -52,8 +52,8 @@ public class EmployeeService {
 
 //    get all Employee where TeamWork id=?
 
-    public List<EmployeeDto> getEmployeesWhereTeamWorkId(Long idTeamWork) {
-        List<Employee> employees = employeeRepository.findAllEmployeesByTeamWorkId(idTeamWork);
+    public List<EmployeeDto> getEmployeesWhereTeamWorkId(String nameTeamWork) {
+        List<Employee> employees = employeeRepository.findAllEmployeesByTeamWorkName(nameTeamWork);
         List<EmployeeDto> employeeDtos = new ArrayList<>();
         for (Employee employee : employees) {
             EmployeeDto employeeDto = new EmployeeDto();

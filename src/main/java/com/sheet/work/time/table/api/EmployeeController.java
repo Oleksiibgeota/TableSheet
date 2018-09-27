@@ -36,9 +36,9 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/employees/teamwork/{idTeamWork}")
-    public HttpEntity<List<EmployeeDto>> getEmployeesWhereTeamWorkId(@PathVariable Long idTeamWork) {
-        List<EmployeeDto> employeeDtos = employeeService.getEmployeesWhereTeamWorkId(idTeamWork);
+    @GetMapping(value = "/employees/teamwork/{nameTeamWork}")
+    public HttpEntity<List<EmployeeDto>> getEmployeesWhereTeamWorkId(@PathVariable String nameTeamWork) {
+        List<EmployeeDto> employeeDtos = employeeService.getEmployeesWhereTeamWorkId(nameTeamWork);
         return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
     }
 
