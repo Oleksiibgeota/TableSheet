@@ -25,6 +25,18 @@ public class ProjectService {
         return projectDtos;
     }
 
+    public ProjectDto createProjectDto(ProjectDto projectDto) {
+        Project projectVo = new Project();
+        long idProjectDto = projectDto.getId();
+        ConvertProjectDtoToVo(projectDto, projectVo);
+        projectRepository.save(projectVo);
+//        does this stupid apply else to sql or another databases
+        // or this is same control
+        projectVo = projectRepository.findById(idProjectDto).get();
+        ConvertProjectVoToDto(projectVo, projectDto);
+        return projectDto;
+    }
+
     public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {
         projectDto.setId(projectVo.getId());
         projectDto.setName(projectVo.getName());
