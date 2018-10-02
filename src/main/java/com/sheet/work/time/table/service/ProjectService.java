@@ -27,12 +27,12 @@ public class ProjectService {
 
     public ProjectDto createProjectDto(ProjectDto projectDto) {
         Project projectVo = new Project();
-        long idProjectDto = projectDto.getId();
         ConvertProjectDtoToVo(projectDto, projectVo);
-        projectRepository.save(projectVo);
+        projectVo = projectRepository.save(projectVo);
+        long idProjectVo = projectVo.getId();
 //        does this stupid apply else to sql or another databases
         // or this is same control
-        projectVo = projectRepository.findById(idProjectDto).get();
+        projectVo = projectRepository.findById(idProjectVo).get();
         ConvertProjectVoToDto(projectVo, projectDto);
         return projectDto;
     }
