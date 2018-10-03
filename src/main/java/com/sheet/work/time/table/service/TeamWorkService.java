@@ -34,6 +34,14 @@ public class TeamWorkService {
         return teamWorkDtos;
     }
 
+    public TeamWorkDto createTeamWork(TeamWorkDto teamWorkDto) {
+        TeamWork teamWork = new TeamWork();
+        ConvertTeamWorkDtoToVo(teamWorkDto, teamWork);
+        teamWork = teamWorkRepository.save(teamWork);
+        ConvertTeamWorkVoToDto(teamWork, teamWorkDto);
+        return teamWorkDto;
+    }
+
 
     public static TeamWorkDto ConvertTeamWorkVoToDto(TeamWork teamWorkVo, TeamWorkDto teamWorkDto) {
         teamWorkDto.setId(teamWorkVo.getId());
