@@ -40,6 +40,9 @@ public class ProjectService {
     public void deleteProjectsByName(String name) {
         projectRepository.deleteProjectsByName(name);
     }
+    public ProjectDto changeProjectByName(String name){
+        return null;
+    }
 
     public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {
         projectDto.setId(projectVo.getId());
