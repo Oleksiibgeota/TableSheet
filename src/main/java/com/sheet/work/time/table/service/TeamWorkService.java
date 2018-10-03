@@ -1,5 +1,6 @@
 package com.sheet.work.time.table.service;
 
+import com.sheet.work.time.table.dto.TeamWorkDto;
 import com.sheet.work.time.table.repository.teamWorkRepository.TeamWorkRepository;
 import com.sheet.work.time.table.vo.TeamWork;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,18 @@ public class TeamWorkService {
             TeamWork teamWork = teamWorkRepository.findById(id).get();
             return teamWork;
         } else throw new EntityNotFoundException("teamWork not found by id = " + id);
+    }
+
+
+    public static TeamWorkDto ConvertTeamWorkVoToDto(TeamWork teamWorkVo, TeamWorkDto teamWorkDto) {
+        teamWorkDto.setId(teamWorkVo.getId());
+        teamWorkDto.setName(teamWorkVo.getName());
+        return teamWorkDto;
+    }
+
+    public static TeamWork ConvertTeamWorkDtoToVo(TeamWorkDto teamWorkDto, TeamWork teamWorkVo) {
+        teamWorkVo.setId(teamWorkDto.getId());
+        teamWorkVo.setName(teamWorkDto.getName());
+        return teamWorkVo;
     }
 }
