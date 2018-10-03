@@ -40,8 +40,14 @@ public class ProjectService {
     public void deleteProjectsByName(String name) {
         projectRepository.deleteProjectsByName(name);
     }
-    public ProjectDto changeProjectByName(String name){
-        return null;
+
+    public ProjectDto changeProjectByName(String name, ProjectDto projectDto) {
+        Project project = projectRepository.findFirstProjectByName(name);
+        projectDto.setId(project.getId());
+        ConvertProjectDtoToVo(projectDto, project);
+        project = projectRepository.save(project);
+        ConvertProjectVoToDto(project, projectDto);
+        return projectDto;
     }
 
     public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {

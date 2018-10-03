@@ -30,6 +30,12 @@ public class ProjectController {
         return new ResponseEntity<>(projectService.createProjectDto(projectDto), HttpStatus.OK);
     }
 
+    @PutMapping("/projects/{name}")
+    public @ResponseBody
+    ResponseEntity changeProjectByName(@PathVariable String name, @RequestBody ProjectDto projectDto) {
+        return ResponseEntity.ok(projectDto);
+    }
+
     @DeleteMapping("/deleteProject/{name}")
     public @ResponseBody
     ResponseEntity deleteProjectByName(@PathVariable String name) {
