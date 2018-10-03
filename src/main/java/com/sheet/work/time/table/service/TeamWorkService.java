@@ -6,6 +6,9 @@ import com.sheet.work.time.table.vo.TeamWork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TeamWorkService {
     @Autowired
@@ -18,6 +21,17 @@ public class TeamWorkService {
             ConvertTeamWorkVoToDto(teamWork, teamWorkDto);
             return teamWorkDto;
         } else throw new EntityNotFoundException("teamWork not found by id = " + id);
+    }
+
+    public List<TeamWorkDto> getTeamWorks() {
+        List<TeamWork> teamWorks = teamWorkRepository.findAll();
+        List<TeamWorkDto> teamWorkDtos = new ArrayList<>();
+        for (TeamWork teamWork : teamWorks) {
+            TeamWorkDto teamWorkDto = new TeamWorkDto();
+            TeamWorkService.ConvertTeamWorkVoToDto(teamWork, teamWorkDto);
+            teamWorkDtos.add(teamWorkDto);
+        }
+        return teamWorkDtos;
     }
 
 

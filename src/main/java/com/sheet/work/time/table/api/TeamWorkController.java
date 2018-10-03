@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 
@@ -28,6 +30,11 @@ public class TeamWorkController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
 
+    @GetMapping("/teamworks")
+    public ResponseEntity getAllTeamWork() {
+        List<TeamWorkDto> teamWorkDtos = teamWorkService.getTeamWorks();
+        return ResponseEntity.ok(teamWorkDtos);
     }
 }
