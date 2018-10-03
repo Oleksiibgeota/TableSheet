@@ -33,6 +33,7 @@ public class ProjectController {
     @PutMapping("/projects/{name}")
     public @ResponseBody
     ResponseEntity changeProjectByName(@PathVariable String name, @RequestBody ProjectDto projectDto) {
+        projectDto = projectService.changeProjectByName(name, projectDto);
         return ResponseEntity.ok(projectDto);
     }
 
