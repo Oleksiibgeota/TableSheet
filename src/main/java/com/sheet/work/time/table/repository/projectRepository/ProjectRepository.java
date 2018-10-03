@@ -7,4 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Transactional
     void deleteProjectsByName(String name);
+    Project findFirstProjectByName(String name);
 }
