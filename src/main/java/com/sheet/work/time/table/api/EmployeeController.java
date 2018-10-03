@@ -21,6 +21,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping("/employees")
+    public HttpEntity<List<EmployeeDto>> getEmployees() {
+        List<EmployeeDto> employeeDtos = employeeService.getEmployees();
+        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/employees/{employeeId}")
     public ResponseEntity getEmployeeById(@PathVariable Long employeeId) {
         try {
@@ -30,16 +36,23 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value = "/employees/byname/{employeesFirstName}")
+    @GetMapping(value = "/employees/byName/{employeesFirstName}")
     public HttpEntity<List<EmployeeDto>> getEmployeesByFirstName(@PathVariable String employeesFirstName) {
         List<EmployeeDto> employeeDtos = employeeService.getEmployeesByFirstName(employeesFirstName);
         return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
     }
 
     @GetMapping(value = "/employees/teamwork/{nameTeamWork}")
-    public HttpEntity<List<EmployeeDto>> getEmployeesWhereTeamWorkId(@PathVariable String nameTeamWork) {
-        List<EmployeeDto> employeeDtos = employeeService.getEmployeesWhereTeamWorkId(nameTeamWork);
+    public HttpEntity<List<EmployeeDto>> getEmployeesWhereTeamWorkName(@PathVariable String nameTeamWork) {
+        List<EmployeeDto> employeeDtos = employeeService.getEmployeesWhereTeamWorkName(nameTeamWork);
         return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteEmployee/{id}")
+    public @ResponseBody
+    ResponseEntity deleteProjectByName(@PathVariable Long id) {
+        employeeService.deleteEmployeeById(id);
+        return ResponseEntity.ok().body(id + "  is delete");
     }
 
 //    @GetMapping(value = "/employees/{employeeId}/team_work/{teamId}")
@@ -57,11 +70,7 @@ public class EmployeeController {
 //    }
 
 
-    @GetMapping(value = "/employees")
-    public HttpEntity<List<EmployeeDto>> getEmployees() {
-        List<EmployeeDto> employeeDtos = employeeService.getEmployees();
-        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
-    }
+
 
     @PostMapping(path = "/addNewEmployee", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody

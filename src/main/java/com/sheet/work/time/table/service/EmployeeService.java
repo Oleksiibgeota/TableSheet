@@ -34,7 +34,7 @@ public class EmployeeService {
             EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
             employeeDtos.add(employeeDto);
         }
-        return  employeeDtos;
+        return employeeDtos;
     }
 
 
@@ -52,7 +52,7 @@ public class EmployeeService {
 
 //    get all Employee where TeamWork id=?
 
-    public List<EmployeeDto> getEmployeesWhereTeamWorkId(String nameTeamWork) {
+    public List<EmployeeDto> getEmployeesWhereTeamWorkName(String nameTeamWork) {
         List<Employee> employees = employeeRepository.findAllEmployeesByTeamWorkName(nameTeamWork);
         List<EmployeeDto> employeeDtos = new ArrayList<>();
         for (Employee employee : employees) {
@@ -79,6 +79,10 @@ public class EmployeeService {
         newEmployee.setId(employeeDto.getId());
         employeeRepository.save(newEmployee);
         return employeeDto;
+    }
+
+    public void deleteEmployeeById(Long id) {
+        employeeRepository.deleteById(id);
     }
 
     public static EmployeeDto ConvertEmployeeVoToDto(Employee employeeVo, EmployeeDto employeeDto) {
