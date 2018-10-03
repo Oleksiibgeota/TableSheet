@@ -24,6 +24,13 @@ public class ProjectController {
 
     }
 
+    @GetMapping("projects/{name}")
+    public @ResponseBody
+    ResponseEntity getProjectByName(@PathVariable String name) {
+        ProjectDto projectDto = projectService.getFirstProjectByName(name);
+        return ResponseEntity.ok(projectDto);
+    }
+
     @PostMapping("/addNewProject")
     public @ResponseBody
     HttpEntity<ProjectDto> createNewProject(@RequestBody ProjectDto projectDto) {
