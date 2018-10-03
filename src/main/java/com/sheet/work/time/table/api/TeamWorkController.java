@@ -1,8 +1,8 @@
 package com.sheet.work.time.table.api;
 
+import com.sheet.work.time.table.dto.TeamWorkDto;
 import com.sheet.work.time.table.service.EntityNotFoundException;
 import com.sheet.work.time.table.service.TeamWorkService;
-import com.sheet.work.time.table.vo.TeamWork;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ public class TeamWorkController {
     @ResponseBody
     public ResponseEntity getTeamWorkById(@PathVariable Long id) {
         try {
-            TeamWork teamWork = teamWorkService.getTeamWorkById(id);
-            return ResponseEntity.ok(teamWork);
+            TeamWorkDto teamWorkDto = teamWorkService.getTeamWorkById(id);
+            return ResponseEntity.ok(teamWorkDto);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

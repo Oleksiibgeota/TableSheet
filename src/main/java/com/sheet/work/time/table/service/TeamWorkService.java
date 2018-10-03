@@ -11,10 +11,12 @@ public class TeamWorkService {
     @Autowired
     TeamWorkRepository teamWorkRepository;
 
-    public TeamWork getTeamWorkById(Long id) throws EntityNotFoundException {
+    public TeamWorkDto getTeamWorkById(Long id) throws EntityNotFoundException {
         if (teamWorkRepository.existsById(id)) {
             TeamWork teamWork = teamWorkRepository.findById(id).get();
-            return teamWork;
+            TeamWorkDto teamWorkDto = new TeamWorkDto();
+            ConvertTeamWorkVoToDto(teamWork, teamWorkDto);
+            return teamWorkDto;
         } else throw new EntityNotFoundException("teamWork not found by id = " + id);
     }
 
