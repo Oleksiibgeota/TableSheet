@@ -31,10 +31,14 @@ public class ProjectService {
         projectVo = projectRepository.save(projectVo);
         long idProjectVo = projectVo.getId();
 //        does this stupid apply else to sql or another databases
-        // or this is same control
+        // or is this same control
         projectVo = projectRepository.findById(idProjectVo).get();
         ConvertProjectVoToDto(projectVo, projectDto);
         return projectDto;
+    }
+
+    public void deleteProjectsByName(String name) {
+        projectRepository.deleteProjectsByName(name);
     }
 
     public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {

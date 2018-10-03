@@ -29,4 +29,11 @@ public class ProjectController {
     HttpEntity<ProjectDto> createNewProject(@RequestBody ProjectDto projectDto) {
         return new ResponseEntity<>(projectService.createProjectDto(projectDto), HttpStatus.OK);
     }
+
+    @DeleteMapping("/deleteProject/{name}")
+    public @ResponseBody
+    ResponseEntity deleteProjectByName(@PathVariable String name) {
+        projectService.deleteProjectsByName(name);
+        return ResponseEntity.ok().body(name + "  is delete");
+    }
 }
