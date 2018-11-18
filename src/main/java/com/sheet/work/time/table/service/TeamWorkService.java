@@ -34,13 +34,15 @@ public class TeamWorkService {
         return teamWorkDtos;
     }
 
-    public TeamWorkDto createTeamWork(TeamWorkDto teamWorkDto) {
-        TeamWork teamWork = new TeamWork();
-        ConvertTeamWorkDtoToVo(teamWorkDto, teamWork);
-        teamWork = teamWorkRepository.save(teamWork);
-        ConvertTeamWorkVoToDto(teamWork, teamWorkDto);
-        return teamWorkDto;
-    }
+//    public TeamWorkDto createTeamWork(TeamWorkDto teamWorkDto) throws EntityNotFoundException {
+//        if (!teamWorkRepository.existTeamWorkFindByName(teamWorkDto.getName())) {
+//            TeamWork teamWork = new TeamWork();
+//            ConvertTeamWorkDtoToVo(teamWorkDto, teamWork);
+//            teamWork = teamWorkRepository.save(teamWork);
+//            ConvertTeamWorkVoToDto(teamWork, teamWorkDto);
+//            return teamWorkDto;
+//        } else throw new EntityNotFoundException("Team by name  " + teamWorkDto.getName() + "not possible");
+//    }
 
 
     public static TeamWorkDto ConvertTeamWorkVoToDto(TeamWork teamWorkVo, TeamWorkDto teamWorkDto) {

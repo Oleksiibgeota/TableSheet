@@ -28,15 +28,16 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/employees/{employeeId}")
-    public ResponseEntity getEmployeeById(@PathVariable Long employeeId) {
+    public HttpEntity<EmployeeDto> getEmployeeById(@PathVariable Long employeeId) {
         try {
             return ResponseEntity.ok(employeeService.getEmployeeById(employeeId));
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+//                    ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
-    @GetMapping(value = "/employees/byName/{employeesFirstName}")
+    @GetMapping(value = "/employees/{employeesFirstName}")
     public HttpEntity<List<EmployeeDto>> getEmployeesByFirstName(@PathVariable String employeesFirstName) {
         List<EmployeeDto> employeeDtos = employeeService.getEmployeesByFirstName(employeesFirstName);
         return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
@@ -48,15 +49,15 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteEmployee/{id}")
+    @DeleteMapping("/employees/{id}")
     public @ResponseBody
     ResponseEntity deleteProjectByName(@PathVariable Long id) {
         employeeService.deleteEmployeeById(id);
         return ResponseEntity.ok().body(id + "  is delete");
     }
 
-//    @GetMapping(value = "/employees/{employeeId}/team_work/{teamId}")
-//    public HttpEntity<EmployeeDto> getEmployeeByIdWhereTeamWorkId(@PathVariable Long employeeId, Long teamId) throws EntityNotFoundException {
+//    @GetMapping(value = "/employees/team_work/{teamId}")
+//    public HttpEntity<EmployeeDto> getEmployeesWhereTeamWorkId(@PathVariable Long teamId) throws EntityNotFoundException {
 //
 //        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
 //        if (employeeDto != null) {
@@ -66,19 +67,16 @@ public class EmployeeController {
 //        } else {
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //        }
-//
 //    }
 
 
-
-
-    @PostMapping(path = "/addNewEmployee", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/employees", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    HttpEntity<Employee> newEmployee(@RequestBody EmployeeDto newEmployeeDto) {
+    HttpEntity<Employee> createEmployee(@RequestBody EmployeeDto newEmployeeDto) {
         return new ResponseEntity<>(employeeService.saveEmployee(newEmployeeDto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateEmployee/{employeeId}")
+    @PutMapping("/employees/{employeeId}")
     public @ResponseBody
     HttpEntity<EmployeeDto> replaceEmployee(@RequestBody EmployeeDto newEmployeeDto, @PathVariable Long employeeId) {
         return new ResponseEntity<EmployeeDto>(employeeService.updateEmployee(newEmployeeDto, employeeId), HttpStatus.OK);

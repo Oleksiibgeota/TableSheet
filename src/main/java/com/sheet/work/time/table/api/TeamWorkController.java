@@ -35,10 +35,14 @@ public class TeamWorkController {
         return ResponseEntity.ok(teamWorkDtos);
     }
 
-    @PostMapping("/addNewTeamWork")
-    @ResponseBody
-    public ResponseEntity createTeamWork(@RequestBody TeamWorkDto teamWorkDto) {
-        teamWorkDto = teamWorkService.createTeamWork(teamWorkDto);
-        return ResponseEntity.ok(teamWorkDto);
-    }
+//    @PostMapping("/addNewTeamWork")
+//    @ResponseBody
+//    public ResponseEntity createTeamWork(@RequestBody TeamWorkDto teamWorkDto) throws EntityNotFoundException {
+//        try {
+//            teamWorkDto = teamWorkService.createTeamWork(teamWorkDto);
+//            return ResponseEntity.ok(teamWorkDto);
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//    }
 }

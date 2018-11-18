@@ -44,7 +44,7 @@ public class ProjectController {
         return ResponseEntity.ok(projectDto);
     }
 
-    @DeleteMapping("/deleteProject/{name}")
+    @DeleteMapping("/projects/{name}")
     public @ResponseBody
     ResponseEntity deleteProjectByName(@PathVariable String name) {
         projectService.deleteProjectsByName(name);
