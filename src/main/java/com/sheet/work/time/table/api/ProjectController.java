@@ -31,7 +31,7 @@ public class ProjectController {
         return ResponseEntity.ok(projectDto);
     }
 
-    @PostMapping("/addNewProject")
+    @PostMapping("/projects")
     public @ResponseBody
     HttpEntity<ProjectDto> createNewProject(@RequestBody ProjectDto projectDto) {
         return new ResponseEntity<>(projectService.createProjectDto(projectDto), HttpStatus.OK);
