@@ -1,6 +1,7 @@
 package com.sheet.work.time.table.service;
 
 
+import com.sheet.work.time.table.ConvertService.ConvertEmployeeService;
 import com.sheet.work.time.table.dto.EmployeeDto;
 import com.sheet.work.time.table.repository.employeeRepository.EmployeeRepository;
 import com.sheet.work.time.table.vo.Employee;
@@ -14,14 +15,13 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private ConvertEmployeeService convertEmployeeService;
 
     public EmployeeDto getEmployeeById(Long id) throws EntityNotFoundException {
         if (employeeRepository.existsById(id)) {
             Employee employee = employeeRepository.findById(id).get();
-            EmployeeDto employeeDto = new EmployeeDto();
-            System.out.println("EmployeeService findById" + " " + employee);
-            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
-            return employeeDto;
+            return convertEmployeeService.convertEmployee(employee);
         } else throw new EntityNotFoundException("employee not found by id " + id);
     }
 
