@@ -1,9 +1,11 @@
-package com.sheet.work.time.table.ConvertService;
+package com.sheet.work.time.table.convertService;
 
 import com.sheet.work.time.table.dto.EmployeeDto;
 import com.sheet.work.time.table.vo.Employee;
+import org.springframework.stereotype.Service;
 
-public class ConvertEmployeeService implements ConvertServiceEmployee {
+@Service
+public  class ConvertEmployeeService implements ConvertServiceEmployee {
     @Override
     public Employee convertEmployee(EmployeeDto employeeDto) {
         Employee employeeVo = new Employee();

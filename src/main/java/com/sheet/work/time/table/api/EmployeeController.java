@@ -37,11 +37,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping(value = "/employees/{employeesFirstName}")
-    public HttpEntity<List<EmployeeDto>> getEmployeesByFirstName(@PathVariable String employeesFirstName) {
-        List<EmployeeDto> employeeDtos = employeeService.getEmployeesByFirstName(employeesFirstName);
-        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
-    }
+//    @GetMapping(value = "/employees/{employeesFirstName}")
+//    public HttpEntity<List<EmployeeDto>> getEmployeesByFirstName(@PathVariable String employeesFirstName) {
+//        List<EmployeeDto> employeeDtos = employeeService.getEmployeesByFirstName(employeesFirstName);
+//        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/employees/teamwork/{nameTeamWork}")
     public HttpEntity<List<EmployeeDto>> getEmployeesWhereTeamWorkName(@PathVariable String nameTeamWork) {

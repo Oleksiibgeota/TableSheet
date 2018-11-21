@@ -1,7 +1,7 @@
 package com.sheet.work.time.table.service;
 
 
-import com.sheet.work.time.table.ConvertService.ConvertEmployeeService;
+import com.sheet.work.time.table.convertService.ConvertEmployeeService;
 import com.sheet.work.time.table.dto.EmployeeDto;
 import com.sheet.work.time.table.repository.employeeRepository.EmployeeRepository;
 import com.sheet.work.time.table.vo.Employee;
