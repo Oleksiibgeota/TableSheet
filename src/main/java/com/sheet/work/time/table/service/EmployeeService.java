@@ -51,9 +51,7 @@ public class EmployeeService {
         List<Employee> employees = employeeRepository.findAllEmployeesByTeamWorkName(nameTeamWork);
         List<EmployeeDto> employeeDtos = new ArrayList<>();
         for (Employee employee : employees) {
-            EmployeeDto employeeDto = new EmployeeDto();
-            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
-            employeeDtos.add(employeeDto);
+            employeeDtos.add(convertEmployeeService.convertEmployee(employee));
         }
         return employeeDtos;
     }
