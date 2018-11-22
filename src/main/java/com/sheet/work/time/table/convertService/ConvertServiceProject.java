@@ -4,7 +4,7 @@ import com.sheet.work.time.table.dto.ProjectDto;
 import com.sheet.work.time.table.vo.Project;
 
 public interface ConvertServiceProject {
-    Project convertProject(Project project);
+    Project convertProject(ProjectDto projectDto);
 
-    ProjectDto convertProject(ProjectDto projectDto);
+    ProjectDto convertProject(Project project);
 }
