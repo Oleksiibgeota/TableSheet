@@ -28,9 +28,7 @@ public class ProjectService {
 
     public ProjectDto getFirstProjectByName(String name) {
         Project project = projectRepository.findFirstProjectByName(name);
-        ProjectDto projectDto = new ProjectDto();
-        ConvertProjectVoToDto(project, projectDto);
-        return projectDto;
+        return convertProjectService.convertProject(project);
     }
 
     public ProjectDto createProjectDto(ProjectDto projectDto) {
