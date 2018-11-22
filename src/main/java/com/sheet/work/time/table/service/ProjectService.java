@@ -31,7 +31,7 @@ public class ProjectService {
         return convertProjectService.convertProject(project);
     }
 
-    public ProjectDto createProjectDto(ProjectDto projectDto) {
+    public ProjectDto createProject(ProjectDto projectDto) {
         Project projectVo = convertProjectService.convertProject(projectDto);
         projectVo = projectRepository.save(projectVo);
         long idProjectVo = projectVo.getId();
