@@ -34,7 +34,6 @@ public class EmployeeService {
         return employeeDtos;
     }
 
-
     public List<EmployeeDto> getEmployees() {
         List<Employee> employees = employeeRepository.findAll();
         List<EmployeeDto> employeeDtos = new ArrayList<>();
@@ -43,8 +42,6 @@ public class EmployeeService {
         }
         return employeeDtos;
     }
-
-
 //    get all Employee where TeamWork id=?
 
     public List<EmployeeDto> getEmployeesWhereTeamWorkName(String nameTeamWork) {
@@ -76,20 +73,6 @@ public class EmployeeService {
 
     public void deleteEmployeeById(Long id) {
         employeeRepository.deleteById(id);
-    }
-
-    public static EmployeeDto ConvertEmployeeVoToDto(Employee employeeVo, EmployeeDto employeeDto) {
-        employeeDto.setId(employeeVo.getId());
-        employeeDto.setFirstName(employeeVo.getFirstName());
-        employeeDto.setLastName(employeeVo.getLastName());
-        return employeeDto;
-    }
-
-    public static Employee ConvertEmployeeDtoToVo(EmployeeDto employeeDto, Employee employeeVo) {
-        employeeVo.setId(employeeDto.getId());
-        employeeVo.setFirstName(employeeDto.getFirstName());
-        employeeVo.setLastName(employeeDto.getLastName());
-        return employeeVo;
     }
 }
 
