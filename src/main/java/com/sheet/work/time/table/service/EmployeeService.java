@@ -63,12 +63,15 @@ public class EmployeeService {
 
     public EmployeeDto updateEmployee(EmployeeDto employeeDto, Long id) {
         Employee newEmployee = employeeRepository.getOne(id);
-//        ConvertEmployeeDtoToVo(employeeDto,newEmployee);
-        newEmployee.setFirstName(employeeDto.getFirstName());
-        newEmployee.setLastName(employeeDto.getLastName());
         newEmployee.setId(employeeDto.getId());
+        if (employeeDto.getFirstName() != null) {
+            newEmployee.setFirstName(employeeDto.getFirstName());
+        }
+        if (employeeDto.getLastName() != null) {
+            newEmployee.setLastName(employeeDto.getLastName());
+        }
         employeeRepository.save(newEmployee);
-        return employeeDto;
+        return convertEmployeeService.convertEmployee(newEmployee);
     }
 
     public void deleteEmployeeById(Long id) {
