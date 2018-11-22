@@ -56,19 +56,6 @@ public class EmployeeController {
         return ResponseEntity.ok().body(id + "  is delete");
     }
 
-//    @GetMapping(value = "/employees/team_work/{teamId}")
-//    public HttpEntity<EmployeeDto> getEmployeesWhereTeamWorkId(@PathVariable Long teamId) throws EntityNotFoundException {
-//
-//        EmployeeDto employeeDto = employeeService.getEmployeeById(employeeId);
-//        if (employeeDto != null) {
-//            ResponseEntity<EmployeeDto> reEmployeeDto = new ResponseEntity<>(employeeDto, HttpStatus.OK);
-//            System.out.println("method getBody" + " " + reEmployeeDto.getBody());
-//            return reEmployeeDto;
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//    }
-
 
     @PostMapping(path = "/employees", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
