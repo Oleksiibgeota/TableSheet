@@ -29,10 +29,7 @@ public class EmployeeService {
         List<Employee> employees = employeeRepository.findEmployeesByFirstName(firstName);
         List<EmployeeDto> employeeDtos = new ArrayList<>();
         for (Employee employee : employees) {
-            System.out.println(employee);
-            EmployeeDto employeeDto = new EmployeeDto();
-            EmployeeService.ConvertEmployeeVoToDto(employee, employeeDto);
-            employeeDtos.add(employeeDto);
+            employeeDtos.add(convertEmployeeService.convertEmployee(employee));
         }
         return employeeDtos;
     }
