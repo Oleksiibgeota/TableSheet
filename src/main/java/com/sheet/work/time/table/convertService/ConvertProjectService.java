@@ -2,7 +2,9 @@ package com.sheet.work.time.table.convertService;
 
 import com.sheet.work.time.table.dto.ProjectDto;
 import com.sheet.work.time.table.vo.Project;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ConvertProjectService implements ConvertServiceProject {
     @Override
     public Project convertProject(ProjectDto projectDto) {
