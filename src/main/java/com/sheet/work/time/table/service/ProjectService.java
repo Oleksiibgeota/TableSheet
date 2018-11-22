@@ -50,20 +50,6 @@ public class ProjectService {
         return convertProjectService.convertProject(projectRepository.save(newProject));
     }
 
-    public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {
-        projectDto.setId(projectVo.getId());
-        projectDto.setName(projectVo.getName());
-        projectDto.setAddress(projectVo.getAddress());
-        projectDto.setDescription(projectVo.getDescription());
-        return projectDto;
-    }
 
-    public static Project ConvertProjectDtoToVo(ProjectDto projectDto, Project projectVo) {
-        projectVo.setId(projectDto.getId());
-        projectVo.setName(projectDto.getName());
-        projectVo.setAddress(projectDto.getAddress());
-        projectVo.setDescription(projectDto.getDescription());
-        return projectVo;
-    }
 
 }
