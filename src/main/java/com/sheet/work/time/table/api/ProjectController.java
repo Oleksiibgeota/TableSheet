@@ -19,7 +19,7 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public HttpEntity<List<ProjectDto>> getAllProjects() {
-        List<ProjectDto> projectDtos = projectService.projectDtos();
+        List<ProjectDto> projectDtos = projectService.getProjectDtos();
         return new ResponseEntity<>(projectDtos, HttpStatus.OK);
 
     }

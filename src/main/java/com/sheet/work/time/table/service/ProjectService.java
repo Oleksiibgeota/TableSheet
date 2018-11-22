@@ -17,7 +17,7 @@ public class ProjectService {
     @Autowired
     ConvertProjectService convertProjectService;
 
-    public List<ProjectDto> projectDtos() {
+    public List<ProjectDto> getProjectDtos() {
         List<Project> projects = projectRepository.findAll();
         List<ProjectDto> projectDtos = new ArrayList<>();
         for (Project project : projects) {
