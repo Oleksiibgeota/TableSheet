@@ -57,10 +57,7 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(EmployeeDto employeeDto) {
-        Employee newEmployee = new Employee();
-        newEmployee.setFirstName(employeeDto.getFirstName());
-        newEmployee.setLastName(employeeDto.getLastName());
-        return employeeRepository.save(newEmployee);
+        return employeeRepository.save(convertEmployeeService.convertEmployee(employeeDto));
 
     }
 
