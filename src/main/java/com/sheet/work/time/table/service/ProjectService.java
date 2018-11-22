@@ -46,10 +46,8 @@ public class ProjectService {
     public ProjectDto changeProjectByName(String name, ProjectDto projectDto) {
         Project project = projectRepository.findFirstProjectByName(name);
         projectDto.setId(project.getId());
-        ConvertProjectDtoToVo(projectDto, project);
-        project = projectRepository.save(project);
-        ConvertProjectVoToDto(project, projectDto);
-        return projectDto;
+        Project newProject = convertProjectService.convertProject(projectDto);
+        return convertProjectService.convertProject(projectRepository.save(newProject));
     }
 
     public static ProjectDto ConvertProjectVoToDto(Project projectVo, ProjectDto projectDto) {
