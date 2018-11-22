@@ -32,15 +32,11 @@ public class ProjectService {
     }
 
     public ProjectDto createProjectDto(ProjectDto projectDto) {
-        Project projectVo = new Project();
-        ConvertProjectDtoToVo(projectDto, projectVo);
+        Project projectVo = convertProjectService.convertProject(projectDto);
         projectVo = projectRepository.save(projectVo);
         long idProjectVo = projectVo.getId();
-//        does this stupid apply else to sql or another databases
-        // or is this same control
         projectVo = projectRepository.findById(idProjectVo).get();
-        ConvertProjectVoToDto(projectVo, projectDto);
-        return projectDto;
+        return convertProjectService.convertProject(projectVo);
     }
 
     public void deleteProjectsByName(String name) {
