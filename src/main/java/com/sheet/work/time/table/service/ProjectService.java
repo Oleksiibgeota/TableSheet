@@ -1,5 +1,6 @@
 package com.sheet.work.time.table.service;
 
+import com.sheet.work.time.table.convertService.ConvertProjectService;
 import com.sheet.work.time.table.dto.ProjectDto;
 import com.sheet.work.time.table.repository.projectRepository.ProjectRepository;
 import com.sheet.work.time.table.vo.Project;
@@ -13,14 +14,14 @@ import java.util.List;
 public class ProjectService {
     @Autowired
     ProjectRepository projectRepository;
+    @Autowired
+    ConvertProjectService convertProjectService;
 
     public List<ProjectDto> projectDtos() {
         List<Project> projects = projectRepository.findAll();
         List<ProjectDto> projectDtos = new ArrayList<>();
         for (Project project : projects) {
-            ProjectDto projectDto = new ProjectDto();
-            ConvertProjectVoToDto(project, projectDto);
-            projectDtos.add(projectDto);
+            projectDtos.add(convertProjectService.convertProject(project));
         }
         return projectDtos;
     }
