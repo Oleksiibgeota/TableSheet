@@ -49,7 +49,4 @@ public class ProjectService {
         Project newProject = convertProjectService.convertProject(projectDto);
         return convertProjectService.convertProject(projectRepository.save(newProject));
     }
-
-
-
 }
